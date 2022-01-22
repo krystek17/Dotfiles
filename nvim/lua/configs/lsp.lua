@@ -1,4 +1,4 @@
-require ("configs.handler").setup()
+require ("configs.lsp-config").setup()
 
 local lsp_installer = require("nvim-lsp-installer")
 
