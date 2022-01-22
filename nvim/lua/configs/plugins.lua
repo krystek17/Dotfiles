@@ -45,14 +45,27 @@ return packer.startup(function(use)
   use "wbthomason/packer.nvim" -- Have packer manage itself
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
-	use "pineapplegiant/spaceduck"
+  use "windwp/nvim-autopairs"
   use 'kyazdani42/nvim-web-devicons'
   use 'kyazdani42/nvim-tree.lua'
   use "akinsho/toggleterm.nvim"
-  use "p00f/nvim-ts-rainbow"
-  use "windwp/nvim-autopairs"
   use "numToStr/Comment.nvim"
   use "nvim-lualine/lualine.nvim"
+
+-- Interface
+  use "pineapplegiant/spaceduck"
+  use "projekt0n/github-nvim-theme"
+  use 'shaunsingh/moonlight.nvim'
+  use 'navarasu/onedark.nvim'
+--   use({	"catppuccin/nvim",	as = "catppuccin"})
+--   use({'rose-pine/neovim',as = 'rose-pine',tag = 'v0.1.0', -- Optional tag release
+--     config = function()
+--         vim.cmd('colorscheme rose-pine')
+--     end
+-- })
+  use "p00f/nvim-ts-rainbow"
+  use "lukas-reineke/indent-blankline.nvim"
+  use 'norcalli/nvim-colorizer.lua'
 
 	-- Completion
   use 'hrsh7th/nvim-cmp'
