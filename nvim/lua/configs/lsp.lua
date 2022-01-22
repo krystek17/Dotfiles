@@ -7,6 +7,11 @@ local lsp_installer = require("nvim-lsp-installer")
 lsp_installer.on_server_ready(function(server)
     local opts = {}
 
+    if server.name == "sumneko_lua" then
+	   	local sumneko_opts = require("configs.lsp")
+	   	opts = vim.tbl_deep_extend("force", sumneko_opts, opts)
+	   end
+
 
     -- (optional) Customize the options passed to the server
     -- if server.name == "tsserver" then
@@ -18,4 +23,20 @@ lsp_installer.on_server_ready(function(server)
     server:setup(opts)
 end)
 
+-- Global variable "vim"
+return {
+	settings = {
 
+		Lua = {
+			diagnostics = {
+				globals = { "vim" },
+			},
+			workspace = {
+				library = {
+					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+					[vim.fn.stdpath("config") .. "/lua"] = true,
+				},
+			},
+		},
+	},
+}
