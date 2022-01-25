@@ -51,6 +51,7 @@ return packer.startup(function(use)
   use "akinsho/toggleterm.nvim"
   use "numToStr/Comment.nvim"
   use "nvim-lualine/lualine.nvim"
+  use "goolord/alpha-nvim"
 
 -- Interface
   use "pineapplegiant/spaceduck"
