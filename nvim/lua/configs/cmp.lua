@@ -10,40 +10,34 @@ end
 
 require("luasnip/loaders/from_vscode").lazy_load()
 
-local check_backspace = function()
-  local col = vim.fn.col "." - 1
-  return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
-end
-
 --   פּ ﯟ   some other good icons
 local kind_icons = {
-  Text = "",
-  Method = "m",
+  Text = "",
+  Method = "",
   Function = "",
-  Constructor = "",
-  Field = "",
-  Variable = "",
-  Class = "",
+  Constructor = "",
+  Field = "",
+  Variable = "",
+  Class = "ﴯ",
   Interface = "",
   Module = "",
-  Property = "",
+  Property = "ﰠ",
   Unit = "",
   Value = "",
   Enum = "",
   Keyword = "",
-  Snippet = "",
+  Snippet = "",
   Color = "",
   File = "",
   Reference = "",
   Folder = "",
   EnumMember = "",
-  Constant = "",
+  Constant = "",
   Struct = "",
   Event = "",
   Operator = "",
-  TypeParameter = "",
+  TypeParameter = ""
 }
--- find more here: https://www.nerdfonts.com/cheat-sheet
 
 cmp.setup {
   snippet = {
@@ -63,7 +57,6 @@ cmp.setup {
       c = cmp.mapping.close(),
     },
     -- Accept currently selected item. If none selected, `select` first item.
-    -- Set `select` to `false` to only confirm explicitly selected items.
     ["<CR>"] = cmp.mapping.confirm { select = true },
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
@@ -72,15 +65,13 @@ cmp.setup {
         luasnip.expand()
       elseif luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
-      elseif check_backspace() then
-        fallback()
+      -- elseif check_backspace() then
+        -- fallback()
       else
         fallback()
       end
-    end, {
-      "i",
-      "s",
-    }),
+    end, { "i", "s", }),
+    -- end, { "i", "s", }),
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
@@ -89,20 +80,17 @@ cmp.setup {
       else
         fallback()
       end
-    end, {
-      "i",
-      "s",
-    }),
+    end, { "i", "s", }),
+    -- end, { "i", "s", }),
   },
+
   formatting = {
     fields = { "kind", "abbr", "menu" },
     format = function(entry, vim_item)
       -- Kind icons
       vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-      -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
       vim_item.menu = ({
         nvim_lsp = "[LSP]",
-        nvim_lua = "[Nvim_lua]",
         luasnip = "[Snippet]",
         buffer = "[Buffer]",
         path = "[Path]",
@@ -110,22 +98,18 @@ cmp.setup {
       return vim_item
     end,
   },
+
   sources = {
     { name = "nvim_lsp" },
-    { name = "nvim_lua" },  
     { name = "luasnip" },
     { name = "buffer" },
-    { name = "path" },
+    { name = "path", keyword_length = 4 },
   },
-  confirm_opts = {
-    behavior = cmp.ConfirmBehavior.Replace,
-    select = false,
-  },
-  documentation = {
-    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-  },
+
   experimental = {
-    ghost_text = true,
+    ghost_text = false,
     native_menu = false,
   },
-} 
+}
+
+

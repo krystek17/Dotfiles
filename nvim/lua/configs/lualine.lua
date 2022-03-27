@@ -32,3 +32,4 @@ lualine.setup({
   tabline = {},
   extensions = {}
 })
+

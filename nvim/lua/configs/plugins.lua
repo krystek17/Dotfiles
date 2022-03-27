@@ -40,60 +40,45 @@ packer.init {
 
 -- Install your plugins here
 return packer.startup(function(use)
-
-  -- My plugins here
+  -- Interace
   use "wbthomason/packer.nvim" -- Have packer manage itself
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
-  use "windwp/nvim-autopairs"
-  use 'kyazdani42/nvim-web-devicons'
-  use 'kyazdani42/nvim-tree.lua'
-  use "akinsho/toggleterm.nvim"
-  use "numToStr/Comment.nvim"
-  use "nvim-lualine/lualine.nvim"
-  use "goolord/alpha-nvim"
-  use "lewis6991/impatient.nvim"
-
-
--- Interface
+  use "numToStr/Comment.nvim" -- Easily comment stuff
+  use "kyazdani42/nvim-web-devicons"
+  use "kyazdani42/nvim-tree.lua"
   use "pineapplegiant/spaceduck"
-  use "projekt0n/github-nvim-theme"
-  use 'shaunsingh/moonlight.nvim'
-  use 'navarasu/onedark.nvim'
---   use({	"catppuccin/nvim",	as = "catppuccin"})
---   use({'rose-pine/neovim',as = 'rose-pine',tag = 'v0.1.0', -- Optional tag release
---     config = function()
---         vim.cmd('colorscheme rose-pine')
---     end
--- })
+  use "nvim-lualine/lualine.nvim"
+  use "windwp/nvim-autopairs"
+  use "akinsho/toggleterm.nvim"
+  use 'goolord/alpha-nvim'
+  use "lewis6991/impatient.nvim"
+  use 'nvim-telescope/telescope.nvim'
   use "p00f/nvim-ts-rainbow"
   use "lukas-reineke/indent-blankline.nvim"
   use 'norcalli/nvim-colorizer.lua'
 
-	-- Completion
-  use 'hrsh7th/nvim-cmp'
-	use "hrsh7th/cmp-buffer" -- buffer completions
+-- Syntax
+   use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate'
+    }
+
+-- Completion
+  use "hrsh7th/nvim-cmp" -- The completion plugin
+  use "hrsh7th/cmp-buffer" -- buffer completions
   use "hrsh7th/cmp-path" -- path completions
   use "hrsh7th/cmp-cmdline" -- cmdline completions
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
   use "hrsh7th/cmp-nvim-lsp"
-  use "hrsh7th/cmp-nvim-lua"
 
-  -- snippets
+-- LSP
+  use "neovim/nvim-lspconfig"
+  use "williamboman/nvim-lsp-installer"
+
+  -- Snippets
   use "L3MON4D3/LuaSnip" --snippet engine
   use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
-
-	-- LSP
-	use {
-    'neovim/nvim-lspconfig',
-    'williamboman/nvim-lsp-installer',
-}
-	-- Syntax
-  use {
-        'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate'
-    }
-  use 'nvim-telescope/telescope.nvim'
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
@@ -101,3 +86,4 @@ return packer.startup(function(use)
     require("packer").sync()
   end
 end)
+

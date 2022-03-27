@@ -1,0 +1,239 @@
+########################################################################
+# i3 config file
+
+# key 
+set $mod Mod4
+
+#Polybar
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+# workspace layouts:
+#default i3 tiling mode
+workspace_layout default
+#workspace_layout stacking
+#workspace_layout tabbed
+#Tiling mode is tabbed:
+#so each new window will open fullscreen as a tab, you can change between window-tabs with mouse or shortcut:
+#
+#    [mod]+Left focus left (left arrow key)
+#    [mod]+Right focus right (right arrow key)
+
+#do not show titlebar on windows: 
+new_window 1pixel
+
+#Fonts
+#font pango:Noto Sans Regular 10
+font pango: Source Code Pro 10
+
+# thin borders:
+hide_edge_borders both
+
+# Set inner/outer gaps
+gaps inner 5
+gaps outer 5
+
+# Use Mouse+$mod to drag floating windows to their wanted position:
+floating_modifier $mod
+
+# kill focused window:
+bindsym $mod+q kill
+
+# change focus:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused windows:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation:
+bindsym $mod+h split h
+
+# split in vertical orientation:
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container:
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split):
+bindsym $mod+Shift+s layout stacking
+bindsym $mod+Shift+w layout tabbed
+bindsym $mod+Shift+e layout toggle split
+
+# toggle tiling / floating:
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows:
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container:
+#bindsym $mod+a focus parent
+
+# focus the child container:
+#bindsym $mod+b focus child
+
+# Bind program to workspace:
+for_window [class="firefox"] move to workspace $ws2
+for_window [class="Virt-manager"] move to workspace $ws7
+
+
+# set floating (nontiling)for apps needing it:
+for_window [class="Yad" instance="yad"] floating enable
+for_window [class="Galculator" instance="galculator"] floating enable
+for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
+for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
+
+# Autostart apps:
+exec --no-startup-id sleep 2 && kitty
+exec --no-startup-id ulauncher
+exec --no-startup-id numlockx on
+exec --no-startup-id nm-applet
+
+#App shortcuts
+bindsym $mod+w exec "/usr/bin/firefox"
+bindsym $mod+e exec "/usr/bin/thunar"
+bindsym Print exec "scrot ~/%Y-%m-%d-%T-screenshot.png"
+bindsym $mod+c exec "/usr/bin/galculator"
+bindsym $mod+Return exec kitty
+
+# dex execute .desktop files:
+#exec --no-startup-id dex -a -s /etc/xdg/autostart/:~/.config/autostart
+exec --no-startup-id dex --autostart --environment i3
+
+# get auth work with polkit-gnome:
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+# transparency:
+#exec --no-startup-id xcompmgr -c
+exec --no-startup-id picom -cC
+
+#set wallpaper:
+exec --no-startup-id nitrogen --restore
+
+# Lock the system
+bindsym $mod+l exec i3lock -i ~/.config/i3/i3-lock-screen.png -t -f
+
+#set powersavings for display:
+exec --no-startup-id xset s 480 dpms 600 600 600
+
+# Desktop notifications_
+exec --no-startup-id /usr/bin/dunst
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+
+# switch to workspace:
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+
+bindsym $mod+Mod2+KP_1 workspace $ws1
+bindsym $mod+Mod2+KP_2 workspace $ws2
+bindsym $mod+Mod2+KP_3 workspace $ws3
+bindsym $mod+Mod2+KP_4 workspace $ws4
+bindsym $mod+Mod2+KP_5 workspace $ws5
+bindsym $mod+Mod2+KP_6 workspace $ws6
+bindsym $mod+Mod2+KP_7 workspace $ws7
+bindsym $mod+Mod2+KP_8 workspace $ws8
+bindsym $mod+Mod2+KP_9 workspace $ws9
+
+# move focused container to workspace:
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+
+bindcode $mod+Shift+87 move container to workspace $ws1
+bindcode $mod+Shift+88 move container to workspace $ws2
+bindcode $mod+Shift+89 move container to workspace $ws3
+bindcode $mod+Shift+83 move container to workspace $ws4
+bindcode $mod+Shift+84 move container to workspace $ws5
+bindcode $mod+Shift+85 move container to workspace $ws6
+bindcode $mod+Shift+79 move container to workspace $ws7
+bindcode $mod+Shift+80 move container to workspace $ws8
+bindcode $mod+Shift+81 move container to workspace $ws9 
+
+# reload the configuration file:
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3):
+bindsym $mod+Shift+r restart
+
+# exit i3 (logs you out of your X session):
+bindsym $mod+Shift+q exec ~/.config/i3/scripts/shutdown_menu -p rofi -c
+
+# resize window (you can also use the mouse for that):
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym ntilde resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# resize floating windows with keyboard:
+bindsym $mod+Ctrl+Right resize shrink width 1 px or 1 ppt
+bindsym $mod+Ctrl+Up resize grow height 1 px or 1 ppt
+bindsym $mod+Ctrl+Down resize shrink height 1 px or 1 ppt
+bindsym $mod+Ctrl+Left resize grow width 1 px or 1 ppt
+
+# volume
+bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
+
+# gradular volume control
+bindsym $mod+XF86AudioRaiseVolume exec amixer -D pulse sset Master 1%+ && pkill -RTMIN+1 i3blocks
+bindsym $mod+XF86AudioLowerVolume exec amixer -D pulse sset Master 1%- && pkill -RTMIN+1 i3blocks
+
+# mute
+bindsym XF86AudioMute exec amixer sset Master toggle && killall -USR1 i3blocks
+bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+# Redirect sound to headphones
+bindsym $mod+m exec "/usr/local/bin/switch-audio-port"o
+
+#network-manager
+exec --no-startup-id nm-applet
+
